@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAutorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_idAutor}" for="idAutor" />
+                    <h:inputText id="idAutor" value="#{autorController.selected.idAutor}" title="#{bundle.CreateAutorTitle_idAutor}" required="true" requiredMessage="#{bundle.CreateAutorRequiredMessage_idAutor}"/>
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_nombreAutor}" for="nombreAutor" />
+                    <h:inputText id="nombreAutor" value="#{autorController.selected.nombreAutor}" title="#{bundle.CreateAutorTitle_nombreAutor}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_apellidoAutor}" for="apellidoAutor" />
+                    <h:inputText id="apellidoAutor" value="#{autorController.selected.apellidoAutor}" title="#{bundle.CreateAutorTitle_apellidoAutor}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_fechaNac}" for="fechaNac" />
+                    <h:inputText id="fechaNac" value="#{autorController.selected.fechaNac}" title="#{bundle.CreateAutorTitle_fechaNac}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_fechaDefAutor}" for="fechaDefAutor" />
+                    <h:inputText id="fechaDefAutor" value="#{autorController.selected.fechaDefAutor}" title="#{bundle.CreateAutorTitle_fechaDefAutor}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    
+                    
+                    <!--<h:outputLabel value="Pais de Origen:" for="idPais" />
+                    <h:selectOneMenu id="idPais" value="#{autorController.selected.idPais}" title="#{bundle.CreateAutorTitle_idPais}" >
+                        <f:selectItems value="#{paisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>-->
+                    
+                    
+                    <h:outputLabel value="Nomb Pais de Origen:" for="idPaiss" />
+                    <h:selectOneMenu id="idPaiss" value="#{autorController.selected.idPais}">
+                        <f:selectItem itemLabel="Seleccione un país" itemValue="" />
+                        <f:selectItems value="#{autorController.listaPaises}" var="pais" itemLabel="#{pais.nombrePais}" itemValue="#{pais}" />
+                    </h:selectOneMenu>
+
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{autorController.create}" value="#{bundle.CreateAutorSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{autorController.prepareList}" value="#{bundle.CreateAutorShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAutorIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
